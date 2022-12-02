@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 
-// let itemName1 = ref<string>('Desk');
 const itemName2 = 'Chair';
 
 const item1 = reactive({
