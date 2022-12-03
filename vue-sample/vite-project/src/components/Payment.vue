@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref, reactive, computed, toRefs, watch } from "vue";
 
 const itemName2 = 'Chair';
 
@@ -29,11 +29,30 @@ const clear = () => {
     item1.price = 0
 }
 
+const budget = 50000
+
+// const priceLavel = computed(() => {
+//     if (item1.price > budget) {
+//         return 'too expensive!'
+//     } else if (item1.price > budget * 2) {
+//         return 'toooo expesive'
+//     } else {
+//         return item1.price
+//     }
+// })
+
+const priceLavel = ref<string>(item1.price + ' yen')
+const { price } = toRefs(item1)
+watch(price, () => {
+
+})
+
+
 </script>
 
 <template>
     <div class="container">
-        <h1>最近の支出</h1>
+        <h1>Price</h1>
         <input v-model="item1.name" />
         <input v-model="item1.price" />
         <!-- <input v-on:input="input" v-bind:value="item1.name"/> -->
@@ -41,7 +60,7 @@ const clear = () => {
         <button v-on:click="clear">Clear</button>
         <div class="payment">
             <label>{{ item1.name }}</label>
-            <label>{{ item1.price }} yen</label>
+            <label>{{ priceLavel }} yen</label>
             <a v-bind:href="url1">bought at...</a>
             <button v-on:click="buy(itemName2)">BUY</button>
         </div>
